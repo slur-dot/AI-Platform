@@ -12,10 +12,7 @@ services:
           name: ai-mongo-db
           property: connectionString
       - key: REDIS_URL
-        fromService:
-          type: pserv
-          name: ai-redis
-          property: connectionString
+        value: redis://ai-redis:6379
       - key: JWT_SECRET
         generateValue: true
 
@@ -30,10 +27,7 @@ services:
           name: ai-mongo-db
           property: connectionString
       - key: REDIS_URL
-        fromService:
-          type: pserv
-          name: ai-redis
-          property: connectionString
+        value: redis://ai-redis:6379
 
   # Frontend React App
   - type: web
