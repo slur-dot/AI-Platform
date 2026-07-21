@@ -1,0 +1,58 @@
+services:
+  # Backend Express Server
+  - type: web
+    name: ai-task-backend
+    env: docker
+    dockerfilePath: ./server/Dockerfile
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        value: fromDatabase:
+          name: ai-mongo-db
+          property: connectionString
+      - key: REDIS_URL
+        value: fromService:
+          type: pserv
+          name: ai-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+
+  # Python AI Worker
+  - type: worker
+    name: ai-task-worker
+    env: docker
+    dockerfilePath: ./worker/Dockerfile
+    envVars:
+      - key: MONGO_URI
+        value: fromDatabase:
+          name: ai-mongo-db
+          property: connectionString
+      - key: REDIS_URL
+        value: fromService:
+          type: pserv
+          name: ai-redis
+          property: connectionString
+
+  # Frontend React App
+  - type: web
+    name: ai-task-frontend
+    env: docker
+    dockerfilePath: ./client/Dockerfile
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://ai-task-backend.onrender.com/api
+
+  # Private Redis Cache
+  - type: pserv
+    name: ai-redis
+    env: docker
+    image: redis:7-alpine
+    port: 6379
+
+databases:
+  # MongoDB Database
+  - name: ai-mongo-db
+    databaseName: ai_tasks
+    user: admin

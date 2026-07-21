@@ -1,5 +1,7 @@
 # AI Task Processing Platform
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/slur-dot/AI-Platform)
+
 A production-ready, full-stack application for creating and executing asynchronous text-processing tasks. Built with the MERN stack, a Python background worker, and a complete Docker/Kubernetes/GitOps infrastructure.
 
 ## Architecture
