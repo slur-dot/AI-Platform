@@ -1,60 +1,75 @@
 .task-detail-container {
-  padding-top: 2rem;
-  padding-bottom: 4rem;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
 }
 
 .back-btn {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .task-detail-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+  background: rgba(13, 13, 29, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header-main {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 .header-title-group {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
 .task-title {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 800;
   margin: 0;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .header-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--card-border);
+  gap: 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .meta-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.625rem;
   color: var(--text-secondary);
   font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.meta-item svg {
+  color: var(--primary);
 }
 
 .meta-item strong {
-  color: var(--text-primary);
-  text-transform: capitalize;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
 }
 
 .detail-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 @media (min-width: 992px) {
@@ -66,53 +81,61 @@
 .content-blocks {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .card-title {
-  font-size: 1.125rem;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 .code-card {
-  padding: 1.5rem;
+  padding: 2rem;
+  background: rgba(13, 13, 29, 0.35);
 }
 
 .code-block {
-  background-color: #0b0b19;
-  border: 1px solid var(--card-border);
+  background-color: #030308;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-md);
-  padding: 1rem;
+  padding: 1.25rem;
   overflow-x: auto;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .code-block pre {
   margin: 0;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace;
   font-size: 0.875rem;
-  color: #a5b4fc;
+  color: #cbd5e1;
   white-space: pre-wrap;
   word-wrap: break-word;
+  line-height: 1.5;
 }
 
 .result-block {
-  background-color: rgba(16, 185, 129, 0.05);
-  border-color: rgba(16, 185, 129, 0.2);
+  background-color: rgba(16, 185, 129, 0.02);
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow: inset 0 2px 8px rgba(16, 185, 129, 0.05);
 }
 
 .result-block pre {
   color: #34d399;
+  font-weight: 500;
 }
 
 .logs-sidebar .card {
   height: 100%;
+  padding: 2rem 1.5rem;
 }
 
 .logs-container {
-  max-height: 500px;
+  max-height: 480px;
   overflow-y: auto;
-  padding-right: 0.5rem;
+  padding-right: 0.25rem;
 }
 
 .logs-list {
@@ -121,31 +144,56 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
+  position: relative;
+}
+
+.logs-list::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 6px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .log-item {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  padding: 0.75rem;
-  background-color: rgba(15, 15, 35, 0.5);
-  border-radius: var(--radius-sm);
-  border-left: 2px solid var(--primary);
+  padding-left: 1.75rem;
+  position: relative;
   font-size: 0.8125rem;
+}
+
+.log-item::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 8px var(--primary);
 }
 
 .log-time {
   color: var(--text-muted);
   font-family: monospace;
+  font-size: 0.75rem;
 }
 
 .log-msg {
   color: var(--text-secondary);
+  line-height: 1.4;
 }
 
 .no-logs {
   color: var(--text-muted);
   font-size: 0.875rem;
   font-style: italic;
+  padding-left: 0.5rem;
 }
+
