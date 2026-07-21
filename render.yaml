@@ -8,11 +8,11 @@ services:
       - key: PORT
         value: 5000
       - key: MONGO_URI
-        value: fromDatabase:
+        fromDatabase:
           name: ai-mongo-db
           property: connectionString
       - key: REDIS_URL
-        value: fromService:
+        fromService:
           type: pserv
           name: ai-redis
           property: connectionString
@@ -26,11 +26,11 @@ services:
     dockerfilePath: ./worker/Dockerfile
     envVars:
       - key: MONGO_URI
-        value: fromDatabase:
+        fromDatabase:
           name: ai-mongo-db
           property: connectionString
       - key: REDIS_URL
-        value: fromService:
+        fromService:
           type: pserv
           name: ai-redis
           property: connectionString
