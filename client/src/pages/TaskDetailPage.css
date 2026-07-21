@@ -1,0 +1,151 @@
+.task-detail-container {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.back-btn {
+  margin-bottom: 1.5rem;
+}
+
+.task-detail-header {
+  margin-bottom: 1.5rem;
+}
+
+.header-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.header-title-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.task-title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.meta-item strong {
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .detail-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.content-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.code-card {
+  padding: 1.5rem;
+}
+
+.code-block {
+  background-color: #0b0b19;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: #a5b4fc;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.result-block {
+  background-color: rgba(16, 185, 129, 0.05);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.result-block pre {
+  color: #34d399;
+}
+
+.logs-sidebar .card {
+  height: 100%;
+}
+
+.logs-container {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.logs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.log-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  background-color: rgba(15, 15, 35, 0.5);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--primary);
+  font-size: 0.8125rem;
+}
+
+.log-time {
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.log-msg {
+  color: var(--text-secondary);
+}
+
+.no-logs {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-style: italic;
+}

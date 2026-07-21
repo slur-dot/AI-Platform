@@ -1,0 +1,147 @@
+.dashboard-container {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.dashboard-title {
+  font-size: 1.875rem;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-subtitle {
+  color: var(--text-muted);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+}
+
+.stat-content h3 {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.stat-content p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.tasks-section {
+  padding: 1.5rem;
+}
+
+.loading-state, .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.loading-state p, .empty-state p {
+  margin-top: 1rem;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state .btn {
+  margin-top: 1.5rem;
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background-color: rgba(15, 15, 35, 0.3);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.task-row:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: var(--card-border);
+}
+
+.task-info h4 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.task-op {
+  text-transform: capitalize;
+}
+
+.task-date {
+  display: flex;
+  align-items: center;
+}
+
+.task-date::before {
+  content: "•";
+  margin-right: 1rem;
+}

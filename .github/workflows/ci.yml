@@ -1,0 +1,111 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Lint Backend
+        run: |
+          cd server
+          npm install
+          npm run lint || npx eslint .
+
+      - name: Lint Frontend
+        run: |
+          cd client
+          npm install
+          npm run lint || npx eslint .
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Lint Worker
+        run: |
+          cd worker
+          pip install flake8
+          flake8 .
+
+  build-and-push:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Build and Push Frontend
+        uses: docker/build-push-action@v4
+        with:
+          context: ./client
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/ai-platform-frontend:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/ai-platform-frontend:latest
+
+      - name: Build and Push Backend
+        uses: docker/build-push-action@v4
+        with:
+          context: ./server
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/ai-platform-backend:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/ai-platform-backend:latest
+
+      - name: Build and Push Worker
+        uses: docker/build-push-action@v4
+        with:
+          context: ./worker
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/ai-platform-worker:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/ai-platform-worker:latest
+
+  update-infra:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Infra Repository
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ secrets.INFRA_REPO }}
+          token: ${{ secrets.INFRA_REPO_TOKEN }}
+          path: infra
+
+      - name: Update Image Tags
+        run: |
+          cd infra
+          NEW_TAG="${{ github.sha }}"
+          DOCKER_USER="${{ secrets.DOCKER_USERNAME }}"
+          sed -i "s|image: .*ai-platform-frontend:.*|image: ${DOCKER_USER}/ai-platform-frontend:${NEW_TAG}|g" frontend/deployment.yaml
+          sed -i "s|image: .*ai-platform-backend:.*|image: ${DOCKER_USER}/ai-platform-backend:${NEW_TAG}|g" backend/deployment.yaml
+          sed -i "s|image: .*ai-platform-worker:.*|image: ${DOCKER_USER}/ai-platform-worker:${NEW_TAG}|g" worker/deployment.yaml
+
+      - name: Commit and Push Changes
+        run: |
+          cd infra
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "chore: update image tags to ${{ github.sha }}"
+          git push
+
