@@ -48,8 +48,7 @@ services:
   - type: pserv
     name: ai-redis
     env: docker
-    image: redis:7-alpine
-    port: 6379
+    dockerfilePath: ./redis/Dockerfile
 
 databases:
   # MongoDB Database
